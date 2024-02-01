@@ -1,0 +1,25 @@
+### Listar Assets (GET /api/assets)
+
+GET http://localhost:3000/api/assets
+
+### Criar Asset (POST /api/assets)
+POST http://localhost:3000/api/assets
+Content-Type: application/json
+
+{
+  "id": 2,
+  "symbol": "JPs"
+}
+
+### Listar Orders (GET /api/orders)
+GET http://localhost:3000/api/orders
+
+### Criar Order (POST /api/orders)
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  "asset_id": 3,
+  "price": 100.0,
+  "status": "open"
+}
