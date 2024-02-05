@@ -7,12 +7,15 @@ export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Asset)
+  @ManyToOne(() => Asset, (asset) => asset.orders, {
+    cascade: true,
+    eager: true,
+  })
   asset: Asset;
 
   @Column()
   price: number;
 
   @Column()
-  status: string; // open, pending, closed
+  status: string;
 }

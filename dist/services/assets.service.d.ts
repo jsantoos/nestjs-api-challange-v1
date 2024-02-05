@@ -1,8 +1,8 @@
 import { Repository } from 'typeorm';
 import { Asset } from '../entities/asset.entity';
-export declare class AssetsService {
+export declare class AssetService {
     private readonly assetRepository;
     constructor(assetRepository: Repository<Asset>);
-    createAsset(assetData: any): Promise<Asset[]>;
     getAllAssets(): Promise<Asset[]>;
+    createAsset(symbol: string): Promise<Asset>;
 }

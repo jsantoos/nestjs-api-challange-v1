@@ -16,17 +16,23 @@ exports.AssetController = void 0;
 const common_1 = require("@nestjs/common");
 const assets_service_1 = require("../services/assets.service");
 let AssetController = class AssetController {
-    constructor(assetsService) {
-        this.assetsService = assetsService;
+    constructor(assetService) {
+        this.assetService = assetService;
+    }
+    findAll() {
+        return this.assetService.getAllAssets();
     }
     create(assetData) {
-        return this.assetsService.createAsset(assetData);
-    }
-    getAll() {
-        return this.assetsService.getAllAssets();
+        return this.assetService.createAsset(assetData.symbol);
     }
 };
 exports.AssetController = AssetController;
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], AssetController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
@@ -34,14 +40,8 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AssetController.prototype, "create", null);
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], AssetController.prototype, "getAll", null);
 exports.AssetController = AssetController = __decorate([
     (0, common_1.Controller)('api/assets'),
-    __metadata("design:paramtypes", [assets_service_1.AssetsService])
+    __metadata("design:paramtypes", [assets_service_1.AssetService])
 ], AssetController);
 //# sourceMappingURL=assets.controller.js.map

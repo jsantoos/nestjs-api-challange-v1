@@ -8,18 +8,30 @@ Content-Type: application/json
 
 {
   "id": 2,
-  "symbol": "JPs"
+  "symbol": "JP"
 }
 
 ### Listar Orders (GET /api/orders)
-GET http://localhost:3000/api/orders
-
+GET http://localhost:3000/api/orders/
 ### Criar Order (POST /api/orders)
+POST http://localhost:3000/api/orders/
+Content-Type: application/json
+
+{
+  "asset_id": 20,
+  "price": 100.0,
+  "status": "open"
+}
+
+
+### Criação de um novo ativo e uma nova ordem
 POST http://localhost:3000/api/orders
 Content-Type: application/json
 
 {
-  "asset_id": 3,
-  "price": 100.0,
-  "status": "open"
+  "price": 10000,
+  "status": "closed",
+  "assetData": {
+    "symbol": "AAPL"
+  }
 }

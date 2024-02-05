@@ -20,7 +20,10 @@ __decorate([
     __metadata("design:type", Number)
 ], Order.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => asset_entity_1.Asset),
+    (0, typeorm_1.ManyToOne)(() => asset_entity_1.Asset, (asset) => asset.orders, {
+        cascade: true,
+        eager: true,
+    }),
     __metadata("design:type", asset_entity_1.Asset)
 ], Order.prototype, "asset", void 0);
 __decorate([

@@ -12,27 +12,27 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AssetsService = void 0;
+exports.AssetService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const asset_entity_1 = require("../entities/asset.entity");
-let AssetsService = class AssetsService {
+let AssetService = class AssetService {
     constructor(assetRepository) {
         this.assetRepository = assetRepository;
-    }
-    async createAsset(assetData) {
-        const asset = this.assetRepository.create(assetData);
-        return this.assetRepository.save(asset);
     }
     async getAllAssets() {
         return this.assetRepository.find();
     }
+    async createAsset(symbol) {
+        const asset = this.assetRepository.create({ symbol });
+        return this.assetRepository.save(asset);
+    }
 };
-exports.AssetsService = AssetsService;
-exports.AssetsService = AssetsService = __decorate([
+exports.AssetService = AssetService;
+exports.AssetService = AssetService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(asset_entity_1.Asset)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
-], AssetsService);
+], AssetService);
 //# sourceMappingURL=assets.service.js.map

@@ -12,27 +12,47 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrdersService = void 0;
+exports.OrderService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const order_entity_1 = require("../entities/order.entity");
-let OrdersService = class OrdersService {
-    constructor(orderRepository) {
+const asset_entity_1 = require("../entities/asset.entity");
+let OrderService = class OrderService {
+    constructor(orderRepository, assetRepository) {
         this.orderRepository = orderRepository;
+        this.assetRepository = assetRepository;
     }
-    async createOrder(orderData) {
-        const order = this.orderRepository.create(orderData);
+    async createOrderWithAsset(orderData) {
+        const { price, status, assetData } = orderData;
+        const order = new order_entity_1.Order();
+        order.price = price;
+        order.status = status;
+        const asset = await this.assetRepository.findOne({
+            where: { symbol: assetData.symbol },
+        });
+        if (!asset) {
+            const newAsset = this.assetRepository.create({
+                symbol: assetData.symbol,
+            });
+            await this.assetRepository.save(newAsset);
+            order.asset = newAsset;
+        }
+        else {
+            order.asset = asset;
+        }
         return this.orderRepository.save(order);
     }
-    async findAllOrders() {
-        return this.orderRepository.find();
+    getAllOrders() {
+        return this.orderRepository.find({ relations: ['asset'] });
     }
 };
-exports.OrdersService = OrdersService;
-exports.OrdersService = OrdersService = __decorate([
+exports.OrderService = OrderService;
+exports.OrderService = OrderService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(order_entity_1.Order)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
-], OrdersService);
+    __param(1, (0, typeorm_1.InjectRepository)(asset_entity_1.Asset)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
+], OrderService);
 //# sourceMappingURL=orders.service.js.map

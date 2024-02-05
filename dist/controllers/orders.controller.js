@@ -12,36 +12,36 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrdersController = void 0;
+exports.OrderController = void 0;
 const common_1 = require("@nestjs/common");
 const orders_service_1 = require("../services/orders.service");
-let OrdersController = class OrdersController {
-    constructor(ordersService) {
-        this.ordersService = ordersService;
+let OrderController = class OrderController {
+    constructor(orderService) {
+        this.orderService = orderService;
     }
-    create(orderData) {
-        return this.ordersService.createOrder(orderData);
+    createOrderWithAsset(orderData) {
+        return this.orderService.createOrderWithAsset(orderData);
     }
-    findAll() {
-        return this.ordersService.findAllOrders();
+    getAllOrders() {
+        return this.orderService.getAllOrders();
     }
 };
-exports.OrdersController = OrdersController;
+exports.OrderController = OrderController;
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], OrdersController.prototype, "create", null);
+], OrderController.prototype, "createOrderWithAsset", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], OrdersController.prototype, "findAll", null);
-exports.OrdersController = OrdersController = __decorate([
+], OrderController.prototype, "getAllOrders", null);
+exports.OrderController = OrderController = __decorate([
     (0, common_1.Controller)('api/orders'),
-    __metadata("design:paramtypes", [orders_service_1.OrdersService])
-], OrdersController);
+    __metadata("design:paramtypes", [orders_service_1.OrderService])
+], OrderController);
 //# sourceMappingURL=orders.controller.js.map

@@ -1,18 +1,26 @@
+// src/orders/controllers/order.controller.ts
 import { Controller, Get, Post, Body } from '@nestjs/common';
-import { OrdersService } from '../services/orders.service';
+import { OrderService } from '../services/orders.service';
 import { Order } from '../entities/order.entity';
 
 @Controller('api/orders')
-export class OrdersController {
-  constructor(private readonly ordersService: OrdersService) {}
+export class OrderController {
+  constructor(private readonly orderService: OrderService) {}
 
   @Post()
-  create(@Body() orderData: any): Promise<Order[]> {
-    return this.ordersService.createOrder(orderData);
+  createOrderWithAsset(
+    @Body()
+    orderData: {
+      price: number;
+      status: string;
+      assetData: { symbol: string };
+    },
+  ): Promise<Order> {
+    return this.orderService.createOrderWithAsset(orderData);
   }
 
   @Get()
-  findAll(): Promise<Order[]> {
-    return this.ordersService.findAllOrders();
+  getAllOrders(): Promise<Order[]> {
+    return this.orderService.getAllOrders();
   }
 }

@@ -1,5 +1,5 @@
-// src/entities/asset.entity.ts
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Order } from './order.entity';
 
 @Entity()
 export class Asset {
@@ -8,4 +8,7 @@ export class Asset {
 
   @Column()
   symbol: string;
+
+  @OneToMany(() => Order, (order) => order.asset)
+  orders: Order[];
 }

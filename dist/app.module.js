@@ -29,8 +29,8 @@ exports.AppModule = AppModule = __decorate([
             }),
             typeorm_1.TypeOrmModule.forFeature([asset_entity_1.Asset, order_entity_1.Order]),
         ],
-        controllers: [assets_controller_1.AssetController, orders_controller_1.OrdersController],
-        providers: [assets_service_1.AssetsService, orders_service_1.OrdersService],
+        controllers: [assets_controller_1.AssetController, orders_controller_1.OrderController],
+        providers: [assets_service_1.AssetService, orders_service_1.OrderService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
